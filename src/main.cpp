@@ -11,11 +11,11 @@ HardwareSerial LoRaSerial(2);
 // =====================================================
 
 #ifndef DEVICE_ADDRESS
-#define DEVICE_ADDRESS 1
+#define DEVICE_ADDRESS 2
 #endif
 
 #ifndef DESTINATION_ADDRESS
-#define DESTINATION_ADDRESS 2
+#define DESTINATION_ADDRESS 1
 #endif
 
 const int myAddress = DEVICE_ADDRESS;

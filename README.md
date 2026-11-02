@@ -60,7 +60,9 @@ Both:     UART baud rate 115200
 
 Terminate each command as required by the module. Verify the exact supported
 command syntax and power requirements in the RYLR998 datasheet for the
-breakout being used.
+breakout being used. The firmware also sends `AT+ADDRESS` and
+`AT+NETWORKID=10` to the attached module at startup, using the address and
+network ID defined by the selected PlatformIO environment.
 
 ## Build and upload
 

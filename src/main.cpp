@@ -18,6 +18,10 @@ HardwareSerial LoRaSerial(2);
 #define DESTINATION_ADDRESS 2
 #endif
 
+#ifndef NETWORK_ID
+#define NETWORK_ID 10
+#endif
+
 const int myAddress = DEVICE_ADDRESS;
 const int destinationAddress = DESTINATION_ADDRESS;
 
@@ -160,6 +164,8 @@ void parseReceivedMessage(String response);
 
 void sendACK(String destination, String id);
 
+void configureLoRaModule();
+
 // =====================================================
 // SETUP
 // =====================================================
@@ -201,6 +207,7 @@ void setup() {
   );
 
   delay(1000);
+  configureLoRaModule();
 
   // -------------------------------------------------
   // Startup information
@@ -255,6 +262,23 @@ void setup() {
 
   Serial.println("Ready.");
   Serial.println();
+}
+
+// =====================================================
+// LORA MODULE CONFIGURATION
+// =====================================================
+
+void configureLoRaModule() {
+
+  LoRaSerial.print("AT+ADDRESS=");
+  LoRaSerial.print(myAddress);
+  LoRaSerial.print("\r\n");
+  delay(200);
+
+  LoRaSerial.print("AT+NETWORKID=");
+  LoRaSerial.print(NETWORK_ID);
+  LoRaSerial.print("\r\n");
+  delay(200);
 }
 
 

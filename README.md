@@ -65,11 +65,29 @@ breakout being used.
 ## Build and upload
 
 ```text
-pio run -e esp32_node_a -t upload
-pio run -e esp32_node_b -t upload
+pio run -e esp32_node_a -t upload --upload-port COMx
+pio run -e esp32_node_b -t upload --upload-port COMx
 ```
 
-The default serial ports are `COM5` for node A and `COM6` for node B; change
-them in `platformio.ini` if Windows assigns different ports. Open each serial
-monitor at 115200 baud. A button press or a line entered in the serial
-monitor on either device is sent to the other device and acknowledged.
+Run only the command for the node assigned to that computer. Replace `COMx`
+with the port shown by that computer (for example, `COM3`). The serial port is
+intentionally not stored in `platformio.ini`, because Windows can assign a
+different port on each machine.
+
+Open the monitor for the same node and port:
+
+```text
+pio device monitor -p COMx -b 115200
+```
+
+For example, on the computer connected to node B:
+
+```text
+pio run -e esp32_node_b -t upload --upload-port COM3
+pio device monitor -p COM3 -b 115200
+```
+
+A button press or a line entered in the serial monitor on either device is
+sent wirelessly to the other device and acknowledged. The two computers do
+not need to be connected to each other; only the RYLR998 modules communicate
+with each other over LoRa.

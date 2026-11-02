@@ -306,14 +306,24 @@ void loop() {
 
       if (userMessage.length() > 0) {
 
+        Serial.println();
         queueMessage(userMessage);
 
         userMessage = "";
       }
 
+    } else if (c == '\b' || c == 127) {
+
+      if (userMessage.length() > 0) {
+
+        userMessage.remove(userMessage.length() - 1);
+        Serial.print("\b \b");
+      }
+
     } else {
 
       userMessage += c;
+      Serial.write(c);
     }
   }
 
